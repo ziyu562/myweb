@@ -92,11 +92,18 @@ function Header({ archive = false }) {
   </header>
 }
 
+function HeroWord({ text, start = 0, className = '' }) {
+  return <span className={`hero-word ${className}`} aria-hidden="true">{[...text].map((character, index) => <span className="hero-char-mask" key={`${character}-${index}`}><span className="hero-char" style={{'--char-delay': `${520 + (start + index) * 48}ms`}}>{character}</span></span>)}</span>
+}
+
 function Hero() {
   return <section className="hero" id="top">
     <div className="hero-orbit" aria-hidden="true"><span>AVAILABLE FOR SELECT PROJECTS · AUCKLAND, NZ · </span></div>
     <div className="hero-kicker"><span className="status-dot"/> Creative technologist / Visual storyteller</div>
-    <h1><span>CODE<span className="accent">/</span>LIGHT</span><span className="outline">/MOTION</span></h1>
+    <h1 className="hero-title hero-name" aria-label="Leo Liu">
+      <span className="hero-title-row hero-title-primary"><HeroWord text="LEO"/></span>
+      <span className="hero-title-row hero-title-secondary"><HeroWord text="LIU" start={3} className="hero-word-motion hero-word-surname"/></span>
+    </h1>
     <div className="hero-bottom">
       <p>I build systems with logic and tell stories with light.<br/>IT graduate, researcher, photographer & editor.</p>
       <a className="circle-link" href="#work" aria-label="Explore selected work"><Arrow/></a>
