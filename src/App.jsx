@@ -323,7 +323,7 @@ export default function App() {
       scrollRoot.removeEventListener('scroll', revealInRange); removeEventListener('resize', revealInRange)
     }
   }, [])
-  const path = window.location.pathname
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
   if (path === '/archive') return <><Header archive/><main><ArchivePage/></main></>
   if (path.startsWith('/archive/')) return <><Header archive/><main><CategoryArchivePage slug={decodeURIComponent(path.slice('/archive/'.length))}/></main></>
   if (path === '/videos') return <><Header archive/><main><VideosPage/></main></>
