@@ -202,13 +202,30 @@ function Projects() {
 }
 
 function Research() {
-  return <section className="section research" id="research"><SectionTitle index="04" eyebrow="Published research" side="Exploring database provenance, data relevance and the infrastructure behind trustworthy decisions.">Research</SectionTitle>
+  return <section className="section research" id="research"><SectionTitle index="04" eyebrow="Published research" side="Exploring database provenance, data relevance and the infrastructure behind trustworthy decisions.">Publications</SectionTitle>
     <div className="paper-list">{papers.map((p, i) => <a href={p.href || '#contact'} data-reveal style={{'--reveal-delay': `${i * 100}ms`}} target={p.href ? '_blank' : undefined} rel="noreferrer" key={p.title} className="paper"><span className="paper-year">{p.year}</span><div><small>{p.venue}</small><h3>{p.title}</h3><p>{p.authors}</p></div><span className="paper-arrow"><Arrow diagonal/></span></a>)}</div>
   </section>
 }
 
 function About() {
-  return <section className="about" id="about"><div className="about-image" data-reveal="image"><img src="/media/photos/astro/IMGL0021-编辑_2.jpg" alt="A figure painting light beneath the Milky Way"/></div><div className="about-copy"><div className="eyebrow" data-reveal>(05) Bio</div><h2 data-reveal data-delay="1">BETWEEN<br/>SYSTEMS <i>&</i><br/>STORIES.</h2><p className="lead" data-reveal data-delay="2">I’m Leo Liu, a creative technologist based in Tāmaki Makaurau Auckland.</p><p data-reveal data-delay="3">With a Master of IT from the University of Auckland and a research background in computer science, I move comfortably between databases, cloud systems and visual storytelling. I like work that is rigorous under the hood and unforgettable on the surface.</p><div className="facts" data-reveal data-delay="4"><div><small>Based</small><span>Auckland, NZ</span></div><div><small>Education</small><span>UoA · IIT · NUAA</span></div><div><small>Languages</small><span>English · 中文</span></div><div><small>Focus</small><span>AI · Data · Visuals</span></div></div></div></section>
+  return <section className="about" id="about"><div className="about-image" data-reveal="image"><img src="/media/photos/astro/IMGL0021-编辑_2.jpg" alt="A figure painting light beneath the Milky Way"/></div><div className="about-copy"><div className="eyebrow" data-reveal>(05) Bio</div><h2 data-reveal data-delay="1">BETWEEN<br/>SYSTEMS <i>&</i><br/>STORIES.</h2><p className="lead" data-reveal data-delay="2">I’m Leo Liu, a creative technologist based in Auckland.</p><p data-reveal data-delay="3">With a Master of IT from the University of Auckland and a research background in computer science, I move comfortably between databases, cloud systems and visual storytelling. I like work that is rigorous under the hood and unforgettable on the surface.</p><a className="bio-link" data-reveal data-delay="4" href="/bio">Read full bio <Arrow diagonal/></a><div className="facts" data-reveal data-delay="4"><div><small>Based</small><span>Auckland, NZ</span></div><div><small>Education</small><span>UoA · IIT · NUAA</span></div><div><small>Languages</small><span>English · 中文</span></div><div><small>Focus</small><span>AI · Data · Visuals</span></div></div></div></section>
+}
+
+function BioPage() {
+  return <section className="bio-page" id="top">
+    <div className="bio-hero"><div className="eyebrow">BIOGRAPHY · AUCKLAND, NZ</div><h1>LOGIC<br/><i>MEETS</i><br/>LIGHT.</h1><p>Creative technologist, computer science researcher and visual storyteller working across intelligent systems, data and image-making.</p><a href="/#about">← Back to overview</a></div>
+    <div className="bio-portrait"><img src="/media/photos/astro/IMGL0021-编辑_2.jpg" alt="Leo creating a light beam beneath the Milky Way"/><span>FIELD STUDY · NIGHT SKY</span></div>
+    <div className="bio-story">
+      <div className="eyebrow">THE THROUGH LINE</div>
+      <div><p className="bio-lead">I’m interested in what happens when rigorous systems meet human perception.</p><p>My background spans computer science research, database provenance, cloud architecture and applied AI. Alongside that technical practice, I photograph landscapes, night skies and cities, and shape moving images from the first frame through the final edit.</p><p>These disciplines are not separate lanes. Research taught me to question how information is produced and trusted; photography taught me to notice timing, atmosphere and what a frame leaves unsaid. Both inform how I build.</p></div>
+    </div>
+    <div className="bio-practice">
+      <div><small>01 · SYSTEMS</small><h2>Technology</h2><p>AI applications, data infrastructure, cloud systems and interfaces designed for clarity, scale and real-world use.</p></div>
+      <div><small>02 · INQUIRY</small><h2>Research</h2><p>Database provenance, data relevance and methods that make analytical decisions more efficient and trustworthy.</p></div>
+      <div><small>03 · IMAGE</small><h2>Visuals</h2><p>Photography, cinematic edits and visual experiments shaped by landscape, light, time and constructed reality.</p></div>
+    </div>
+    <div className="bio-details"><div><small>Education</small><span>Master of Information Technology<br/>University of Auckland</span></div><div><small>Working languages</small><span>English<br/>中文</span></div><div><small>Selected focus</small><span>AI · Data · Cloud<br/>Photography · Film</span></div><div><small>Based</small><span>Auckland<br/>New Zealand</span></div></div>
+  </section>
 }
 
 function Footer() {
@@ -258,5 +275,6 @@ export default function App() {
   if (path === '/archive') return <><Header archive/><main><ArchivePage/></main></>
   if (path.startsWith('/archive/')) return <><Header archive/><main><CategoryArchivePage slug={decodeURIComponent(path.slice('/archive/'.length))}/></main></>
   if (path === '/videos') return <><Header archive/><main><VideosPage/></main></>
+  if (path === '/bio') return <><Header archive/><main><BioPage/></main><Footer/></>
   return <><Header/><main><Hero/><Gallery/><Film/><Projects/><Research/><About/></main><Footer/></>
 }
