@@ -68,6 +68,18 @@ function Arrow({ diagonal = false }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path d={diagonal ? 'M7 17 17 7M8 7h9v9' : 'M5 12h14m-5-5 5 5-5 5'} /></svg>
 }
 
+function navigateHomeSection(section, event) {
+  event?.preventDefault()
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  if (path === '/') {
+    document.getElementById(section)?.scrollIntoView({behavior: 'smooth', block: 'start'})
+    history.replaceState(null, '', '/')
+    return
+  }
+  sessionStorage.setItem('home-section', section)
+  window.location.assign('/')
+}
+
 function Header({ archive = false }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -79,14 +91,13 @@ function Header({ archive = false }) {
     root.addEventListener('scroll', update, { passive: true })
     return () => root.removeEventListener('scroll', update)
   }, [])
-  const sectionHref = id => archive ? `/#${id}` : `#${id}`
   return <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
-    <a className="brand" href={archive ? '/' : '#top'} aria-label="Leo Liu home"><span>LEO</span><span>LIU®</span></a>
+    <a className="brand" href="/" onClick={event => navigateHomeSection('top', event)} aria-label="Leo Liu home"><span>LEO</span><span>LIU®</span></a>
     <nav className={open ? 'open' : ''}>
-      <a href={sectionHref('work')} onClick={() => setOpen(false)}>Portfolio</a>
-      <a href={sectionHref('projects')} onClick={() => setOpen(false)}>Projects</a>
-      <a href={sectionHref('research')} onClick={() => setOpen(false)}>Publications</a>
-      <a href={sectionHref('about')} onClick={() => setOpen(false)}>Bio</a>
+      <a href="/" onClick={event => {setOpen(false); navigateHomeSection('work', event)}}>Portfolio</a>
+      <a href="/" onClick={event => {setOpen(false); navigateHomeSection('projects', event)}}>Projects</a>
+      <a href="/" onClick={event => {setOpen(false); navigateHomeSection('research', event)}}>Publications</a>
+      <a href="/" onClick={event => {setOpen(false); navigateHomeSection('about', event)}}>Bio</a>
     </nav>
     <button className="menu" onClick={() => setOpen(!open)} aria-label="Toggle navigation"><span/><span/></button>
   </header>
@@ -106,7 +117,7 @@ function Hero() {
     </h1>
     <div className="hero-bottom">
       <p>I build systems with logic and tell stories with light.<br/>IT graduate, researcher, photographer & editor.</p>
-      <a className="circle-link" href="#work" aria-label="Explore selected work"><Arrow/></a>
+      <a className="circle-link" href="/" onClick={event => navigateHomeSection('work', event)} aria-label="Explore selected work"><Arrow/></a>
     </div>
     <div className="hero-image"><img src="/media/photos/astro/IMGL0021-编辑_2.jpg" alt="A figure shining a beam of light toward the Milky Way"/><div className="scanline"/></div>
   </section>
@@ -142,7 +153,7 @@ function Gallery() {
 
 function ArchivePage() {
   return <section className="archive-page" id="top">
-    <div className="archive-hero"><div className="eyebrow">PHOTOGRAPHIC ARCHIVE · 2026</div><h1>ALL<br/><i>FRAMES</i></h1><p>A complete visual index of night skies, distant landscapes, cities and constructed realities.</p><a href="/#work">← Back to selected work</a></div>
+    <div className="archive-hero"><div className="eyebrow">PHOTOGRAPHIC ARCHIVE · 2026</div><h1>ALL<br/><i>FRAMES</i></h1><p>A complete visual index of night skies, distant landscapes, cities and constructed realities.</p><a href="/" onClick={event => navigateHomeSection('work', event)}>← Back to selected work</a></div>
     <div className="archive-categories">
       <div className="category-heading"><div><small>BROWSE THE ARCHIVE</small><h2>Explore by category</h2></div><a href="/archive/all">View all · {images.length}</a></div>
       <div className="category-grid">{archiveCategories.map(category => {
@@ -194,7 +205,7 @@ function Film() {
 
 function VideosPage() {
   return <section className="archive-page video-archive" id="top">
-    <div className="archive-hero"><div className="eyebrow">MOTION ARCHIVE · 2026</div><h1>ALL<br/><i>MOTION</i></h1><p>Films, visual studies and cinematic fragments — directed, shot and edited frame by frame.</p><a href="/#work">← Back to selected work</a></div>
+    <div className="archive-hero"><div className="eyebrow">MOTION ARCHIVE · 2026</div><h1>ALL<br/><i>MOTION</i></h1><p>Films, visual studies and cinematic fragments — directed, shot and edited frame by frame.</p><a href="/" onClick={event => navigateHomeSection('work', event)}>← Back to selected work</a></div>
     <div className="video-index-grid">{videos.map((video, index) => <article className="video-index-card" key={video.src}>
       <div className="video-index-media"><video controls playsInline preload="metadata" poster={`/media/${video.poster}`}><source src={`/media/${video.src}`} type="video/mp4"/></video><span>{String(index + 1).padStart(2, '0')}</span></div>
       <div className="video-index-caption"><div><h2>{video.title}</h2><p>{video.subtitle}</p></div><small>{video.duration}</small></div>
@@ -210,7 +221,7 @@ function Projects() {
 
 function ProjectPage({ slug }) {
   const project = projects.find(item => item.slug === slug)
-  if (!project) return <section className="project-page"><div className="project-not-found"><span>404</span><h1>Project not found.</h1><a href="/#projects">← Back to projects</a></div></section>
+  if (!project) return <section className="project-page"><div className="project-not-found"><span>404</span><h1>Project not found.</h1><a href="/" onClick={event => navigateHomeSection('projects', event)}>← Back to projects</a></div></section>
   const current = projects.indexOf(project)
   const next = projects[(current + 1) % projects.length]
   return <section className="project-page" id="top">
@@ -218,7 +229,7 @@ function ProjectPage({ slug }) {
       <div className="eyebrow">PROJECT {project.n} · DIGITAL PRACTICE</div>
       <h1>{project.title}</h1>
       <p>{project.text}</p>
-      <a href="/#projects">← Back to selected projects</a>
+      <a href="/" onClick={event => navigateHomeSection('projects', event)}>← Back to selected projects</a>
     </div>
     <div className="project-visual" aria-hidden="true"><div className="project-stack">{project.meta.split(' · ').map(item => <span key={item}>{item}</span>)}</div><small>{project.role}</small></div>
     <div className="project-narrative">
@@ -239,14 +250,14 @@ function Research() {
 
 function PublicationPage({ slug }) {
   const paper = papers.find(item => item.slug === slug)
-  if (!paper) return <section className="publication-page"><div className="project-not-found"><span>404</span><h1>Publication not found.</h1><a href="/#research">← Back to publications</a></div></section>
+  if (!paper) return <section className="publication-page"><div className="project-not-found"><span>404</span><h1>Publication not found.</h1><a href="/" onClick={event => navigateHomeSection('research', event)}>← Back to publications</a></div></section>
   const pdfSrc = `/media/paper/${paper.pdf}`
   return <section className="publication-page" id="top">
     <div className="publication-hero">
       <div className="publication-meta"><span>{paper.year}</span><span>{paper.venue}</span></div>
       <h1>{paper.title}</h1>
       <div className="publication-byline"><p>{paper.authors}</p><small>{paper.citation}</small></div>
-      <a href="/#research">← Back to publications</a>
+      <a href="/" onClick={event => navigateHomeSection('research', event)}>← Back to publications</a>
     </div>
     <div className="publication-summary"><div className="eyebrow">ABSTRACT / SUMMARY</div><p>{paper.abstract}</p></div>
     <div className="publication-reader">
@@ -262,7 +273,7 @@ function About() {
 
 function BioPage() {
   return <section className="bio-page" id="top">
-    <div className="bio-hero"><div className="eyebrow">BIOGRAPHY · AUCKLAND, NZ</div><h1>LOGIC<br/><i>MEETS</i><br/>LIGHT.</h1><p>Creative technologist, computer science researcher and visual storyteller working across intelligent systems, data and image-making.</p><a href="/#about">← Back to overview</a></div>
+    <div className="bio-hero"><div className="eyebrow">BIOGRAPHY · AUCKLAND, NZ</div><h1>LOGIC<br/><i>MEETS</i><br/>LIGHT.</h1><p>Creative technologist, computer science researcher and visual storyteller working across intelligent systems, data and image-making.</p><a href="/" onClick={event => navigateHomeSection('about', event)}>← Back to overview</a></div>
     <div className="bio-portrait"><img src="/media/photos/astro/IMGL0021-编辑_2.jpg" alt="Leo creating a light beam beneath the Milky Way"/><span>FIELD STUDY · NIGHT SKY</span></div>
     <div className="bio-story">
       <div className="eyebrow">THE THROUGH LINE</div>
@@ -278,15 +289,21 @@ function BioPage() {
 }
 
 function Footer() {
-  return <footer id="contact"><div className="footer-top"><div className="eyebrow" data-reveal><span className="status-dot"/> Open to collaborations</div><h2 data-reveal data-delay="1">LET’S MAKE<br/><i>SOMETHING</i> <span>STRANGE.</span></h2><a className="email" data-reveal data-delay="2" href="mailto:zliu562@aucklanduni.ac.nz">zliu562@aucklanduni.ac.nz <Arrow diagonal/></a></div><div className="footer-bottom" data-reveal><span>© 2026 Leo Liu</span><div><a href="https://www.linkedin.com/in/ziyu-liu-9b6352355/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/zliu102/" target="_blank" rel="noreferrer">GitHub ↗</a></div><a href="#top">Back to top ↑</a></div></footer>
+  return <footer id="contact"><div className="footer-top"><div className="eyebrow" data-reveal><span className="status-dot"/> Open to collaborations</div><h2 data-reveal data-delay="1">LET’S MAKE<br/><i>SOMETHING</i> <span>STRANGE.</span></h2><a className="email" data-reveal data-delay="2" href="mailto:zliu562@aucklanduni.ac.nz">zliu562@aucklanduni.ac.nz <Arrow diagonal/></a></div><div className="footer-bottom" data-reveal><span>© 2026 Leo Liu</span><div><a href="https://www.linkedin.com/in/ziyu-liu-9b6352355/" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/zliu102/" target="_blank" rel="noreferrer">GitHub ↗</a></div><a href="/" onClick={event => navigateHomeSection('top', event)}>Back to top ↑</a></div></footer>
 }
 
 export default function App() {
   useEffect(() => {
     const root = document.getElementById('root')
     const restorePosition = () => requestAnimationFrame(() => {
-      if (window.location.hash) document.querySelector(window.location.hash)?.scrollIntoView({block: 'start'})
-      else if (root) root.scrollTop = 0
+      const queuedSection = sessionStorage.getItem('home-section')
+      const legacySection = window.location.hash.replace('#', '')
+      const section = queuedSection || legacySection
+      if (queuedSection) sessionStorage.removeItem('home-section')
+      if (section && window.location.pathname === '/') {
+        document.getElementById(section)?.scrollIntoView({block: 'start'})
+        history.replaceState(null, '', '/')
+      } else if (root) root.scrollTop = 0
     })
     restorePosition()
     addEventListener('hashchange', restorePosition)
