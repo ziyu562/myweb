@@ -52,16 +52,16 @@ const videos = [
 ]
 
 const projects = [
-  { n: '01', title: 'ESG AI Insight Assistant', meta: 'AWS · Bedrock · DynamoDB · Python', text: 'A serverless data assistant that turns natural-language questions into emissions insights, visualisations and compliance-ready reports.' },
-  { n: '02', title: 'GProM', meta: 'Research · Databases · Oracle', text: 'Database-independent middleware for computing provenance. Built data-skipping and self-tuning techniques for faster analytical queries.', link: 'https://github.com/IITDBGroup/gprom' },
-  { n: '03', title: 'Ticket+', meta: 'Java · REST · MongoDB · EC2', text: 'An event discovery and recommendation service, load-tested to handle 150 queries per second.' },
-  { n: '04', title: 'Around', meta: 'Go · Elasticsearch · GCP', text: 'A scalable, geo-indexed social network with nearby search, Dataflow pipelines and BigQuery analytics.' },
+  { n: '01', slug: 'esg-ai-insight-assistant', title: 'ESG AI Insight Assistant', meta: 'AWS · Bedrock · Lambda · DynamoDB', text: 'A cloud-based intelligent system that brings fragmented ESG data into one query, visualisation and reporting experience.', context: 'ESG teams often work across spreadsheets, PDF documents and regulatory web pages. The internship team created a prototype for the fictional company KoraWorks that could reason over both numerical records and unstructured policy documents while returning verifiable citations.', approach: 'I owned backend architecture and integration: building Basic and Advanced Query Lambda functions, connecting DynamoDB and Bedrock Knowledge Bases, integrating API Gateway, and resolving IAM, environment-variable and CORS issues. I also developed semantic citation re-ranking, parallel data access and context compression for more accurate, responsive answers.', highlights: ['Reduced incorrect citations by more than half through semantic re-ranking', 'Improved average response time by almost 40% through prompt and parallel-execution optimisation', 'Integrated Lambda, API Gateway, DynamoDB, S3, Bedrock and EventBridge in a modular serverless architecture'], role: 'BACKEND ARCHITECTURE · AI INTEGRATION · CLOUD OPTIMISATION' },
+  { n: '02', slug: 'gprom', title: 'GProM', meta: 'Research · Provenance · Oracle · C', text: 'Database-independent middleware for computing the provenance of queries, updates and transactions.', context: 'At the IIT Database Group, in collaboration with Oracle Database Group, I worked on making provenance computation practical for large databases where query cost and storage overhead can become prohibitive.', approach: 'I developed provenance-based data-skipping techniques, self-tuning methods that reuse sketches captured for one query to answer another, and cost-based selection of provenance sketches to improve analytical performance.', highlights: ['Developed provenance-based data skipping for large analytical queries', 'Built self-tuning techniques for reusing provenance sketches across queries', 'Co-authored research on data skipping, data value and cost-based sketch selection'], role: 'DATABASE RESEARCH · QUERY OPTIMISATION · PROVENANCE', external: 'https://github.com/IITDBGroup/gprom' },
+  { n: '03', slug: 'ticket-plus', title: 'Ticket+', meta: 'Java · REST · MySQL · MongoDB', text: 'An event search, ticketing and recommendation service deployed to EC2 and load-tested at 150 queries per second.', context: 'Ticket+ was built as an end-to-end event discovery experience: users could search Ticketmaster inventory, inspect events, purchase tickets and receive content-based recommendations.', approach: 'I built the interactive AJAX interface, Java servlets and RESTful APIs, captured Ticketmaster data in MySQL and MongoDB, implemented content-based recommendation logic, and deployed the service to Amazon EC2.', highlights: ['Integrated live event data from the Ticketmaster API', 'Built content-based event recommendations across relational and NoSQL data', 'Validated 150 queries per second with Apache JMeter'], role: 'FULL-STACK DEVELOPMENT · RECOMMENDATION · LOAD TESTING' },
+  { n: '04', slug: 'around', title: 'Around', meta: 'Go · Elasticsearch · GCP · BigQuery', text: 'A scalable geo-indexed social network for discovering nearby posts and analysing platform activity.', context: 'Around was designed around fast spatial discovery: users needed to create posts and search for relevant activity within a chosen distance while the platform retained an analytics path for operational insight.', approach: 'I built the web service in Go, deployed it on Google App Engine Flexible, used Elasticsearch on GCE for geo-location search, and created a daily Dataflow export into BigQuery.', highlights: ['Delivered distance-based nearby-post search with Elasticsearch', 'Built a scalable Go service on Google App Engine Flexible', 'Aggregated post- and user-level data in BigQuery to improve keyword spam detection'], role: 'GO SERVICES · GEO SEARCH · CLOUD ANALYTICS' },
 ]
 
 const papers = [
-  { year: '2025', venue: 'arXiv', title: 'Cost-based Selection of Provenance Sketches for Data Skipping', authors: 'Ziyu Liu · Boris Glavic', href: 'https://arxiv.org/abs/2504.19252' },
-  { year: '2024', venue: 'CIDR', title: 'Towards an Objective Metric for Data Value Through Relevance', authors: 'B. Glavic · P. Li · Z. Liu · et al.' },
-  { year: '2021', venue: 'PVLDB 15(3)', title: 'Provenance-based Data Skipping', authors: 'X. Niu · Z. Liu · P. Li · et al.' },
+  { year: '2025', venue: 'arXiv', slug: 'cost-based-selection-of-provenance-sketches', title: 'Cost-based Selection of Provenance Sketches for Data Skipping', authors: 'Ziyu Liu · Boris Glavic', citation: 'arXiv:2504.19252', pdf: 'Cost-based Selection of Provenance Sketches for Data Skipping.pdf', abstract: 'Provenance sketches are lightweight indexes that record which data is relevant for answering a query. Their effectiveness depends strongly on how a table is partitioned. This work develops sample-based techniques to estimate sketch sizes and select the candidate attributes expected to provide the greatest benefit. Experiments show that the estimates select optimal or near-optimal sketches in most cases, producing runtime improvements of up to 60% over other selection strategies.' },
+  { year: '2024', venue: 'CIDR', slug: 'objective-metric-for-data-value', title: 'Towards an Objective Metric for Data Value Through Relevance', authors: 'Boris Glavic · Pengyuan Li · Ziyu Liu · Dieter Gawlick · Vasudha Krishnaswamy · Danica Porobic · Zhen Hua Liu', citation: 'Proceedings of CIDR · 9 pages', pdf: 'Towards an Objective Metric for Data Value Through Relevance.pdf', abstract: 'This vision paper proposes an objective metric for data value based on data relevance: the contribution a piece of data makes to query and workload results. It outlines how such metrics can be computed and maintained, then applied to storage organisation, query performance, curation priorities, data catalogs and pricing decisions. The paper also considers evolving workloads, dark data, and the relationship between the value of queries and the value of data.' },
+  { year: '2021', venue: 'PVLDB 15(3)', slug: 'provenance-based-data-skipping', title: 'Provenance-based Data Skipping', authors: 'Xing Niu · Boris Glavic · Ziyu Liu · Pengyuan Li · Dieter Gawlick · Vasudha Krishnaswamy · Zhen Hua Liu · Danica Porobic', citation: 'PVLDB 15(3) · 451-464 · DOI 10.14778/3494124.3494130', pdf: 'Provenance-based Data Skipping.pdf', abstract: 'Database systems usually rely on static analysis to decide what data a query needs, but this is insufficient for important classes such as HAVING and top-k queries. Provenance-based data skipping captures compact provenance sketches at runtime to describe relevant input data. Those sketches can then accelerate later queries by exposing filter conditions that existing indexes, zone maps and other physical design structures can exploit.' },
 ]
 
 function Arrow({ diagonal = false }) {
@@ -197,13 +197,55 @@ function VideosPage() {
 
 function Projects() {
   return <section className="section projects" id="projects"><SectionTitle index="03" eyebrow="Digital practice" side="Systems engineered for scale, clarity and real-world use.">Selected<br/><i>projects</i></SectionTitle>
-    <div className="project-list">{projects.map((p, i) => <a className="project-row" data-reveal style={{'--reveal-delay': `${i * 85}ms`}} href={p.link || '#contact'} key={p.n} target={p.link ? '_blank' : undefined} rel="noreferrer"><span>{p.n}</span><div><h3>{p.title}</h3><p>{p.text}</p></div><small>{p.meta}</small><span className="project-arrow"><Arrow diagonal/></span></a>)}</div>
+    <div className="project-list">{projects.map((p, i) => <a className="project-row" data-reveal style={{'--reveal-delay': `${i * 85}ms`}} href={`/projects/${p.slug}`} key={p.n}><span>{p.n}</span><div><h3>{p.title}</h3><p>{p.text}</p></div><small>{p.meta}</small><span className="project-arrow"><Arrow diagonal/></span></a>)}</div>
+  </section>
+}
+
+function ProjectPage({ slug }) {
+  const project = projects.find(item => item.slug === slug)
+  if (!project) return <section className="project-page"><div className="project-not-found"><span>404</span><h1>Project not found.</h1><a href="/#projects">← Back to projects</a></div></section>
+  const current = projects.indexOf(project)
+  const next = projects[(current + 1) % projects.length]
+  return <section className="project-page" id="top">
+    <div className="project-detail-hero">
+      <div className="eyebrow">PROJECT {project.n} · DIGITAL PRACTICE</div>
+      <h1>{project.title}</h1>
+      <p>{project.text}</p>
+      <a href="/#projects">← Back to selected projects</a>
+    </div>
+    <div className="project-visual" aria-hidden="true"><div className="project-stack">{project.meta.split(' · ').map(item => <span key={item}>{item}</span>)}</div><small>{project.role}</small></div>
+    <div className="project-narrative">
+      <div><small>01 · CONTEXT</small><h2>The problem</h2><p>{project.context}</p></div>
+      <div><small>02 · APPROACH</small><h2>The system</h2><p>{project.approach}</p></div>
+    </div>
+    <div className="project-highlights"><div className="eyebrow">KEY OUTCOMES</div><ol>{project.highlights.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol></div>
+    {project.external && <a className="project-external" href={project.external} target="_blank" rel="noreferrer"><span>Explore the project on GitHub</span><Arrow diagonal/></a>}
+    <a className="next-project" href={`/projects/${next.slug}`}><small>NEXT PROJECT · {next.n}</small><span>{next.title}</span><Arrow/></a>
   </section>
 }
 
 function Research() {
   return <section className="section research" id="research"><SectionTitle index="04" eyebrow="Published research" side="Exploring database provenance, data relevance and the infrastructure behind trustworthy decisions.">Publications</SectionTitle>
-    <div className="paper-list">{papers.map((p, i) => <a href={p.href || '#contact'} data-reveal style={{'--reveal-delay': `${i * 100}ms`}} target={p.href ? '_blank' : undefined} rel="noreferrer" key={p.title} className="paper"><span className="paper-year">{p.year}</span><div><small>{p.venue}</small><h3>{p.title}</h3><p>{p.authors}</p></div><span className="paper-arrow"><Arrow diagonal/></span></a>)}</div>
+    <div className="paper-list">{papers.map((p, i) => <a href={`/publications/${p.slug}`} data-reveal style={{'--reveal-delay': `${i * 100}ms`}} key={p.title} className="paper"><span className="paper-year">{p.year}</span><div><small>{p.venue}</small><h3>{p.title}</h3><p>{p.authors}</p></div><span className="paper-arrow"><Arrow diagonal/></span></a>)}</div>
+  </section>
+}
+
+function PublicationPage({ slug }) {
+  const paper = papers.find(item => item.slug === slug)
+  if (!paper) return <section className="publication-page"><div className="project-not-found"><span>404</span><h1>Publication not found.</h1><a href="/#research">← Back to publications</a></div></section>
+  const pdfSrc = `/media/paper/${paper.pdf}`
+  return <section className="publication-page" id="top">
+    <div className="publication-hero">
+      <div className="publication-meta"><span>{paper.year}</span><span>{paper.venue}</span></div>
+      <h1>{paper.title}</h1>
+      <div className="publication-byline"><p>{paper.authors}</p><small>{paper.citation}</small></div>
+      <a href="/#research">← Back to publications</a>
+    </div>
+    <div className="publication-summary"><div className="eyebrow">ABSTRACT / SUMMARY</div><p>{paper.abstract}</p></div>
+    <div className="publication-reader">
+      <div><div><small>FULL TEXT</small><span>{paper.pdf}</span></div><a href={pdfSrc} target="_blank" rel="noreferrer">Open PDF full screen <Arrow diagonal/></a></div>
+      <iframe src={`${pdfSrc}#view=FitH`} title={`Full text of ${paper.title}`}/>
+    </div>
   </section>
 }
 
@@ -233,6 +275,16 @@ function Footer() {
 }
 
 export default function App() {
+  useEffect(() => {
+    const root = document.getElementById('root')
+    const restorePosition = () => requestAnimationFrame(() => {
+      if (window.location.hash) document.querySelector(window.location.hash)?.scrollIntoView({block: 'start'})
+      else if (root) root.scrollTop = 0
+    })
+    restorePosition()
+    addEventListener('hashchange', restorePosition)
+    return () => removeEventListener('hashchange', restorePosition)
+  }, [])
   useEffect(() => {
     const reveal = element => element.classList.add('is-visible')
     if (!('IntersectionObserver' in window)) {
@@ -276,5 +328,7 @@ export default function App() {
   if (path.startsWith('/archive/')) return <><Header archive/><main><CategoryArchivePage slug={decodeURIComponent(path.slice('/archive/'.length))}/></main></>
   if (path === '/videos') return <><Header archive/><main><VideosPage/></main></>
   if (path === '/bio') return <><Header archive/><main><BioPage/></main><Footer/></>
+  if (path.startsWith('/projects/')) return <><Header archive/><main><ProjectPage slug={decodeURIComponent(path.slice('/projects/'.length))}/></main><Footer/></>
+  if (path.startsWith('/publications/')) return <><Header archive/><main><PublicationPage slug={decodeURIComponent(path.slice('/publications/'.length))}/></main><Footer/></>
   return <><Header/><main><Hero/><Gallery/><Film/><Projects/><Research/><About/></main><Footer/></>
 }
