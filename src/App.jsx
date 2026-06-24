@@ -116,7 +116,7 @@ function Hero() {
       <span className="hero-title-row hero-title-secondary"><HeroWord text="LIU" start={3} className="hero-word-motion hero-word-surname"/></span>
     </h1>
     <div className="hero-bottom">
-      <p>I build systems with logic and tell stories with light.<br/>IT graduate, researcher, photographer & editor.</p>
+      <div className="hero-intro"><p>I’m Leo Liu, a Master of Information Technology graduate from the University of Auckland and a former Research & Teaching Assistant at Illinois Institute of Technology. I work across technology and visual storytelling, bringing together full-stack, cloud and data experience with a broad photographic practice. As a contracted photographer with Visual China Group, I specialise in landscapes, portraits, cities and night skies, capturing the people, atmosphere and places that shape how I see the world.</p><a className="hero-bio-link" href="/bio">Read full bio <Arrow diagonal/></a></div>
       <a className="circle-link" href="/" onClick={event => navigateHomeSection('work', event)} aria-label="Explore selected work"><Arrow/></a>
     </div>
     <div className="hero-image"><img src="/media/photos/astro/IMGL0021-编辑_2.jpg" alt="A figure shining a beam of light toward the Milky Way"/><div className="scanline"/></div>

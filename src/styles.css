@@ -44,3 +44,7 @@ footer{padding:140px var(--pad) 30px;background:var(--accent);color:var(--accent
 .hero h1.hero-name{font-size:clamp(112px,20.5vw,300px);line-height:.68;margin-left:clamp(24px,5vw,72px)}.hero-name .hero-char-mask{padding-left:.055em;padding-right:.07em;margin-left:-.025em;margin-right:-.04em}
 @media (max-width:900px){.hero h1.hero-name{font-size:28vw;line-height:.7;margin-left:5vw}}
 footer{background:#dedde5}
+.hero-bottom{width:52%}.hero-intro{max-width:590px}.hero-intro p{margin:0}.hero-bio-link{display:inline-flex;align-items:center;gap:28px;margin-top:17px;padding-bottom:8px;border-bottom:1px solid rgba(241,240,246,.3);font:10px DM Mono;text-transform:uppercase;letter-spacing:.08em;transition:gap .4s,color .4s,border-color .4s}.hero-bio-link svg{width:16px}.hero-bio-link:hover{gap:38px;color:var(--accent);border-color:var(--accent)}
+@media (max-width:900px){.hero-bottom{width:100%}.hero-intro{max-width:min(78%,560px)}}
+@media (max-width:560px){.hero-intro{max-width:80%}.hero-intro p{font-size:10px;line-height:1.65}.hero-bio-link{margin-top:12px}}
+@media (min-width:561px) and (max-width:900px){.hero-intro p{font-size:11px;line-height:1.7}}
