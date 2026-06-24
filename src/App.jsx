@@ -52,10 +52,11 @@ const videos = [
 ]
 
 const projects = [
-  { n: '01', slug: 'esg-ai-insight-assistant', title: 'ESG AI Insight Assistant', meta: 'AWS · Bedrock · Lambda · DynamoDB', text: 'A cloud-based intelligent system that brings fragmented ESG data into one query, visualisation and reporting experience.', context: 'ESG teams often work across spreadsheets, PDF documents and regulatory web pages. The internship team created a prototype for the fictional company KoraWorks that could reason over both numerical records and unstructured policy documents while returning verifiable citations.', approach: 'I owned backend architecture and integration: building Basic and Advanced Query Lambda functions, connecting DynamoDB and Bedrock Knowledge Bases, integrating API Gateway, and resolving IAM, environment-variable and CORS issues. I also developed semantic citation re-ranking, parallel data access and context compression for more accurate, responsive answers.', highlights: ['Reduced incorrect citations by more than half through semantic re-ranking', 'Improved average response time by almost 40% through prompt and parallel-execution optimisation', 'Integrated Lambda, API Gateway, DynamoDB, S3, Bedrock and EventBridge in a modular serverless architecture'], role: 'BACKEND ARCHITECTURE · AI INTEGRATION · CLOUD OPTIMISATION' },
-  { n: '02', slug: 'gprom', title: 'GProM', meta: 'Research · Provenance · Oracle · C', text: 'Database-independent middleware for computing the provenance of queries, updates and transactions.', context: 'At the IIT Database Group, in collaboration with Oracle Database Group, I worked on making provenance computation practical for large databases where query cost and storage overhead can become prohibitive.', approach: 'I developed provenance-based data-skipping techniques, self-tuning methods that reuse sketches captured for one query to answer another, and cost-based selection of provenance sketches to improve analytical performance.', highlights: ['Developed provenance-based data skipping for large analytical queries', 'Built self-tuning techniques for reusing provenance sketches across queries', 'Co-authored research on data skipping, data value and cost-based sketch selection'], role: 'DATABASE RESEARCH · QUERY OPTIMISATION · PROVENANCE', external: 'https://github.com/IITDBGroup/gprom' },
-  { n: '03', slug: 'ticket-plus', title: 'Ticket+', meta: 'Java · REST · MySQL · MongoDB', text: 'An event search, ticketing and recommendation service deployed to EC2 and load-tested at 150 queries per second.', context: 'Ticket+ was built as an end-to-end event discovery experience: users could search Ticketmaster inventory, inspect events, purchase tickets and receive content-based recommendations.', approach: 'I built the interactive AJAX interface, Java servlets and RESTful APIs, captured Ticketmaster data in MySQL and MongoDB, implemented content-based recommendation logic, and deployed the service to Amazon EC2.', highlights: ['Integrated live event data from the Ticketmaster API', 'Built content-based event recommendations across relational and NoSQL data', 'Validated 150 queries per second with Apache JMeter'], role: 'FULL-STACK DEVELOPMENT · RECOMMENDATION · LOAD TESTING' },
-  { n: '04', slug: 'around', title: 'Around', meta: 'Go · Elasticsearch · GCP · BigQuery', text: 'A scalable geo-indexed social network for discovering nearby posts and analysing platform activity.', context: 'Around was designed around fast spatial discovery: users needed to create posts and search for relevant activity within a chosen distance while the platform retained an analytics path for operational insight.', approach: 'I built the web service in Go, deployed it on Google App Engine Flexible, used Elasticsearch on GCE for geo-location search, and created a daily Dataflow export into BigQuery.', highlights: ['Delivered distance-based nearby-post search with Elasticsearch', 'Built a scalable Go service on Google App Engine Flexible', 'Aggregated post- and user-level data in BigQuery to improve keyword spam detection'], role: 'GO SERVICES · GEO SEARCH · CLOUD ANALYTICS' },
+  { n: '01', slug: 'esg-ai-insight-assistant', title: 'ESG AI Insight Assistant', meta: 'AWS · Bedrock · Lambda · DynamoDB', text: 'A cloud-based intelligent system that brings fragmented ESG data into one query, visualisation and reporting experience.', context: 'ESG teams often work across spreadsheets, PDF documents and regulatory web pages. The internship team created a prototype for the fictional company KoraWorks that could reason over both numerical records and unstructured policy documents while returning verifiable citations.', approach: 'I owned backend architecture and integration: building Basic and Advanced Query Lambda functions, connecting DynamoDB and Bedrock Knowledge Bases, integrating API Gateway, and resolving IAM, environment-variable and CORS issues. I also developed semantic citation re-ranking, parallel data access and context compression for more accurate, responsive answers.', highlights: [{title:'AI-powered ESG Assistant',text:'Designed and developed a unified assistant that brings fragmented ESG records, company documents and regulatory information into one self-service analysis experience.'},{title:'Serverless Backend Architecture',text:'Built and integrated AWS Lambda, API Gateway, DynamoDB, S3 and Bedrock components, including Basic and Advanced Query functions for structured, document and combined queries.'},{title:'Natural-language Reasoning',text:'Implemented question answering and report generation with Bedrock Claude models, routing each request to the appropriate structured data or Knowledge Base workflow.'},{title:'Visualisation & Reporting',text:'Developed ESG analysis, emissions visualisation and downloadable reporting workflows, using Python-based processing to produce compliance-ready summaries.'},{title:'Accuracy, Speed & Reliability',text:'Added semantic citation re-ranking, parallel data access and context compression; incorrect citations fell by more than half and average response time improved by almost 40%.'}], role: 'BACKEND ARCHITECTURE · AI INTEGRATION · CLOUD OPTIMISATION' },
+  { n: '02', slug: 'gprom', title: 'GProM', meta: 'Research · Provenance · Oracle · C', text: 'Database-independent middleware for computing the provenance of queries, updates and transactions.', context: 'At the IIT Database Group, in collaboration with Oracle Database Group, I worked on making provenance computation practical for large databases where query cost and storage overhead can become prohibitive.', approach: 'I developed provenance-based data-skipping techniques, self-tuning methods that reuse sketches captured for one query to answer another, and cost-based selection of provenance sketches to improve analytical performance.', highlights: [{title:'Provenance Middleware',text:'Contributed to database-independent middleware that computes the provenance of queries, updates and transactions across heterogeneous database systems.'},{title:'Provenance-based Data Skipping',text:'Developed techniques that capture compact provenance sketches and use them to avoid reading data that is irrelevant to later analytical queries.'},{title:'Self-tuning Sketch Reuse',text:'Built methods that reuse sketches captured for one query when answering different queries, reducing repeated computation and maintenance overhead.'},{title:'Large-database Optimisation',text:'Improved analytical query performance and storage efficiency for large databases through targeted skipping and provenance-aware execution strategies.'},{title:'Cost-based Sketch Selection',text:'Developed cost-aware methods for selecting useful sketch attributes and partitions, supporting optimal or near-optimal data-skipping configurations.'}], role: 'DATABASE RESEARCH · QUERY OPTIMISATION · PROVENANCE', external: 'https://github.com/IITDBGroup/gprom' },
+  { n: '03', slug: 'ticket-plus', title: 'Ticket+ Recommendation System', meta: 'Java · REST · MySQL · MongoDB', text: 'An event search, ticketing and recommendation service deployed to EC2 and load-tested at 150 queries per second.', context: 'Ticket+ was built as an end-to-end event discovery experience: users could search Ticketmaster inventory, inspect events, purchase tickets and receive content-based recommendations.', approach: 'I built the interactive AJAX interface, Java servlets and RESTful APIs, captured Ticketmaster data in MySQL and MongoDB, implemented content-based recommendation logic, and deployed the service to Amazon EC2.', highlights: [{title:'Interactive Event Experience',text:'Designed a responsive web interface for event search and ticket purchase using AJAX, HTML, CSS and JavaScript, keeping discovery interactions fast and fluid.'},{title:'Java RESTful Services',text:'Created Java servlets and RESTful APIs to process HTTP requests and responses between the browser, recommendation logic and persistent data services.'},{title:'Relational & NoSQL Data',text:'Built MySQL and MongoDB data layers to capture and organise live event information retrieved from the Ticketmaster API.'},{title:'Content-based Recommendations',text:'Designed recommendation algorithms that compare event content and user interests to surface more relevant events within the discovery experience.'},{title:'AWS Deployment & Load Testing',text:'Deployed the service to Amazon EC2 and used Apache JMeter to validate sustained handling of 150 queries per second.'}], role: 'FULL-STACK DEVELOPMENT · RECOMMENDATION · LOAD TESTING', external: 'https://github.com/ziyu562/Ticket' },
+  { n: '04', slug: 'nba-player-strength-visualization', title: 'NBA Player Strength Visualization', meta: 'React · JavaScript · Data Visualisation', text: 'An interactive dashboard for exploring individual NBA player shooting performance across games and outcomes.', context: 'Raw shot records make it difficult to understand where a player performs best or how performance changes between home and away games, wins and losses, and different shooting percentages. This project turns those records into a connected visual analysis experience.', approach: 'I built a React dashboard with a shot chart and four supporting line and bar charts. Shared React state links highlighting across every view, while field-goal percentage and match filters enable detailed comparisons of made shots, home and away games, and winning and losing performances.', highlights: [{title:'Player Performance Dashboard',text:'Created an interactive dashboard for analysing individual NBA player shooting data through a spatial shot chart and four supporting line and bar charts.'},{title:'Linked Chart Highlighting',text:'Implemented coordinated highlighting through shared React state, allowing selections in one chart to remain visible across every connected view.'},{title:'Field-goal Percentage Filter',text:'Added a field-goal percentage control for isolating made-shot performance and examining efficiency at different thresholds.'},{title:'Match Context Filters',text:'Developed home, away, win and loss filters so users can compare how player performance changes across different game contexts.'}], role: 'REACT DEVELOPMENT · INTERACTION DESIGN · SPORTS DATA', external: 'https://github.com/ziyu562/NBA-Player-Strength-Visualization' },
+  { n: '05', slug: 'around', title: 'Geo-index Based Social Network', meta: 'Go · Elasticsearch · GCP · BigQuery', text: 'A scalable geo-indexed social network for discovering nearby posts and analysing platform activity.', context: 'Around was designed around fast spatial discovery: users needed to create posts and search for relevant activity within a chosen distance while the platform retained an analytics path for operational insight.', approach: 'I built the web service in Go, deployed it on Google App Engine Flexible, used Elasticsearch on GCE for geo-location search, and created a daily Dataflow export into BigQuery.', highlights: [{title:'Scalable Go Web Service',text:'Built the backend service in Go to create and retrieve social posts, then deployed it to Google App Engine Flexible for managed cloud scaling.'},{title:'Geo-indexed Search',text:'Configured Elasticsearch on Google Compute Engine to index post locations and return nearby activity through distance-based geographic search.'},{title:'Daily Dataflow Pipeline',text:'Implemented a scheduled Google Dataflow process that exports daily post data into BigQuery for longer-term analysis.'},{title:'Spam-detection Analytics',text:'Aggregated post-level and user-level behaviour in BigQuery to strengthen keyword-based spam detection and platform monitoring.'}], role: 'GO SERVICES · GEO SEARCH · CLOUD ANALYTICS', external: 'https://github.com/ziyu562/Geo-index-based-social-network' },
 ]
 
 const papers = [
@@ -108,10 +109,32 @@ function HeroWord({ text, start = 0, className = '' }) {
 }
 
 function Hero() {
+  const titleRef = useRef(null)
+  useEffect(() => {
+    const root = document.getElementById('root')
+    const title = titleRef.current
+    if (!root || !title) return
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const travel = Math.max(320, Math.min(window.innerHeight * .58, 620))
+      const progress = Math.max(0, Math.min(1, (root.scrollTop - 20) / travel))
+      title.style.setProperty('--hero-exit', progress.toFixed(4))
+    }
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    root.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      root.removeEventListener('scroll', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
   return <section className="hero" id="top">
     <div className="hero-orbit" aria-hidden="true"><span>AVAILABLE FOR SELECT PROJECTS · AUCKLAND, NZ · </span></div>
     <div className="hero-kicker"><span className="status-dot"/> Creative technologist / Visual storyteller</div>
-    <h1 className="hero-title hero-name" aria-label="Leo Liu">
+    <h1 ref={titleRef} className="hero-title hero-name" aria-label="Leo Liu">
       <span className="hero-title-row hero-title-primary"><HeroWord text="LEO"/></span>
       <span className="hero-title-row hero-title-secondary"><HeroWord text="LIU" start={3} className="hero-word-motion hero-word-surname"/></span>
     </h1>
@@ -228,15 +251,22 @@ function ProjectPage({ slug }) {
     <div className="project-detail-hero">
       <div className="eyebrow">PROJECT {project.n} · DIGITAL PRACTICE</div>
       <h1>{project.title}</h1>
-      <p>{project.text}</p>
-      <a href="/" onClick={event => navigateHomeSection('projects', event)}>← Back to selected projects</a>
+      <div className="project-detail-copy">
+        <p>{project.text}</p>
+        <a href="/" onClick={event => navigateHomeSection('projects', event)}>← Back to selected projects</a>
+      </div>
     </div>
-    <div className="project-visual" aria-hidden="true"><div className="project-stack">{project.meta.split(' · ').map(item => <span key={item}>{item}</span>)}</div><small>{project.role}</small></div>
-    <div className="project-narrative">
-      <div><small>01 · CONTEXT</small><h2>The problem</h2><p>{project.context}</p></div>
-      <div><small>02 · APPROACH</small><h2>The system</h2><p>{project.approach}</p></div>
+    <div className="project-abstract">
+      <div className="project-abstract-copy">
+        <small>01 · ABSTRACT</small><h2>Abstract</h2>
+        <p>{project.context}</p><p>{project.approach}</p>
+      </div>
+      <aside className="project-skills">
+        <small>02 · CAPABILITIES</small><h3>Technical Stack<br/>&amp; Skills</h3>
+        <div className="project-skill-list">{[...project.meta.split(' · '), ...project.role.split(' · ')].map(item => <span key={item}>{item}</span>)}</div>
+      </aside>
     </div>
-    <div className="project-highlights"><div className="eyebrow">KEY OUTCOMES</div><ol>{project.highlights.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol></div>
+    <div className="project-highlights"><div className="eyebrow">PROJECT CONTRIBUTIONS</div><div className="contribution-grid">{project.highlights.map((item, index) => <article key={item.title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></div>
     {project.external && <a className="project-external" href={project.external} target="_blank" rel="noreferrer"><span>Explore the project on GitHub</span><Arrow diagonal/></a>}
     <a className="next-project" href={`/projects/${next.slug}`}><small>NEXT PROJECT · {next.n}</small><span>{next.title}</span><Arrow/></a>
   </section>
@@ -295,19 +325,37 @@ function Footer() {
 export default function App() {
   useEffect(() => {
     const root = document.getElementById('root')
-    const restorePosition = () => requestAnimationFrame(() => {
+    const timers = []
+    let active = true
+    const placeSection = section => {
+      const target = document.getElementById(section)
+      if (!root || !target || !active) return
+      const previousBehavior = root.style.scrollBehavior
+      root.style.scrollBehavior = 'auto'
+      const headerOffset = document.querySelector('.site-header')?.offsetHeight || 82
+      root.scrollTop = Math.max(0, root.scrollTop + target.getBoundingClientRect().top - headerOffset)
+      if (sessionStorage.getItem('home-section') === section) sessionStorage.removeItem('home-section')
+      requestAnimationFrame(() => { if (active) root.style.scrollBehavior = previousBehavior })
+    }
+    const restorePosition = () => {
       const queuedSection = sessionStorage.getItem('home-section')
       const legacySection = window.location.hash.replace('#', '')
       const section = queuedSection || legacySection
-      if (queuedSection) sessionStorage.removeItem('home-section')
       if (section && window.location.pathname === '/') {
-        document.getElementById(section)?.scrollIntoView({block: 'start'})
         history.replaceState(null, '', '/')
+        requestAnimationFrame(() => requestAnimationFrame(() => placeSection(section)))
+        timers.push(setTimeout(() => placeSection(section), 140))
+        timers.push(setTimeout(() => placeSection(section), 420))
+        document.fonts?.ready.then(() => placeSection(section))
       } else if (root) root.scrollTop = 0
-    })
+    }
     restorePosition()
     addEventListener('hashchange', restorePosition)
-    return () => removeEventListener('hashchange', restorePosition)
+    return () => {
+      active = false
+      timers.forEach(clearTimeout)
+      removeEventListener('hashchange', restorePosition)
+    }
   }, [])
   useEffect(() => {
     const reveal = element => element.classList.add('is-visible')
