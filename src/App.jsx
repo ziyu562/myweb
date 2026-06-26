@@ -303,9 +303,33 @@ function About() {
 }
 
 function BioPage() {
+  const nameRef = useRef(null)
+  useEffect(() => {
+    const root = document.getElementById('root')
+    const name = nameRef.current
+    if (!root || !name) return
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const rect = name.parentElement.getBoundingClientRect()
+      const progress = Math.max(0, Math.min(1, -rect.top / Math.max(rect.height * .72, 1)))
+      const easedProgress = 1 - Math.pow(1 - progress, 3)
+      name.style.setProperty('--bio-name-drift', `${easedProgress * 130}px`)
+    }
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    root.addEventListener('scroll', onScroll, { passive: true })
+    addEventListener('resize', onScroll)
+    return () => {
+      root.removeEventListener('scroll', onScroll)
+      removeEventListener('resize', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
   return <section className="bio-page" id="top">
-    <div className="bio-hero"><div className="eyebrow">BIOGRAPHY · AUCKLAND, NZ</div><h1>LOGIC<br/><i>MEETS</i><br/>LIGHT.</h1><p>Creative technologist, computer science researcher and visual storyteller working across intelligent systems, data and image-making.</p><a href="/" onClick={event => navigateHomeSection('about', event)}>← Back to overview</a></div>
-    <div className="bio-portrait"><img src="/media/photos/astro/IMGL0021-编辑_2.jpg" alt="Leo creating a light beam beneath the Milky Way"/><span>FIELD STUDY · NIGHT SKY</span></div>
+    <div className="bio-portrait"><img src="/media/photos/Bio/IMGL1954.JPG" alt="Leo Liu portrait"/><h1 ref={nameRef} className="bio-portrait-name">Leo Liu</h1><span>FIELD STUDY · NIGHT SKY</span></div>
     <div className="bio-story">
       <div className="eyebrow">THE THROUGH LINE</div>
       <div><p className="bio-lead">I’m interested in what happens when rigorous systems meet human perception.</p><p>My background spans computer science research, database provenance, cloud architecture and applied AI. Alongside that technical practice, I photograph landscapes, night skies and cities, and shape moving images from the first frame through the final edit.</p><p>These disciplines are not separate lanes. Research taught me to question how information is produced and trusted; photography taught me to notice timing, atmosphere and what a frame leaves unsaid. Both inform how I build.</p></div>
