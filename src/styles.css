@@ -72,3 +72,23 @@ footer{background:#dedde5}
 .bio-practice strong{font-size:clamp(16px,1.45vw,21px);line-height:1.25;margin-bottom:8px;color:var(--text)}
 .bio-practice span{font:10px/1.8 DM Mono;text-transform:uppercase;letter-spacing:.08em;color:#827d90}
 @media (max-width:900px){.bio-practice>div{grid-template-columns:1fr;min-height:auto;padding:58px 0;gap:24px}.bio-practice h2{font-size:clamp(40px,12vw,72px)}.bio-practice p{font-size:15px}}
+.film-audio{display:flex;align-items:center;gap:9px}
+.film-audio button{width:34px;height:34px;padding:0;border:1px solid rgba(13,12,18,.28);border-radius:50%;background:rgba(255,255,255,.18);color:#0d0c12;display:grid;place-items:center;cursor:pointer;transition:background .35s,border-color .35s,color .35s,transform .35s}
+.film-audio button:hover,.film-audio button.is-on{background:#0d0c12;border-color:#0d0c12;color:#f1f0f6}
+.film-audio button:active{transform:scale(.94)}
+.speaker-icon{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.film-volume{width:58px;height:2px;accent-color:var(--accent);cursor:pointer}
+.film-volume::-webkit-slider-runnable-track{height:1px;background:rgba(13,12,18,.36)}
+.film-volume::-webkit-slider-thumb{margin-top:-5px}
+@media (max-width:760px){.film-controls{align-items:flex-start;gap:18px;flex-direction:column}.film-control-end{width:100%;justify-content:space-between;gap:14px;flex-wrap:wrap}.film-audio{order:-1}.film-volume{width:72px}}
+.video-index-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 22px}
+.video-index-card{padding-top:16px}
+.video-index-media{overflow:hidden;border:1px solid var(--line)}
+.video-index-media video{max-height:none;aspect-ratio:16/9;object-fit:cover}
+.video-index-media>span{top:12px;left:12px;padding:6px 8px;font-size:9px;background:rgba(8,8,12,.58);backdrop-filter:blur(10px)}
+.video-index-caption{align-items:flex-start;padding-top:14px;gap:16px}
+.video-index-caption h2{font-size:clamp(18px,2.1vw,30px);line-height:1;letter-spacing:-.045em}
+.video-index-caption p{font-size:12px;margin-top:5px}
+.video-index-caption small{padding-top:3px;white-space:nowrap}
+@media (max-width:760px){.video-index-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 16px}.video-index-caption{flex-direction:column;gap:8px}.video-index-caption small{padding-top:0}}
+@media (max-width:480px){.video-index-grid{grid-template-columns:1fr}.video-index-media video{aspect-ratio:16/10}}

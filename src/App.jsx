@@ -49,6 +49,8 @@ const videos = [
   { src: 'videos/0725星轨-web.mp4', poster: 'videos/0725星轨-poster.jpg', title: 'Star Trails', subtitle: 'Night Study No. 02', duration: '00:08' },
   { src: 'videos/0622-web.mp4', poster: 'videos/0622-poster.jpg', title: 'Night Sequence', subtitle: 'Light Study No. 03', duration: '00:11' },
   { src: 'videos/奥克兰穿云-web.mp4', poster: 'videos/奥克兰穿云-poster.jpg', title: 'Above Auckland', subtitle: 'Aerial Study No. 04', duration: '00:16' },
+  { src: 'videos/樱花3.mp4', poster: 'videos/樱花3-poster.jpg', title: 'Sakura Drift', subtitle: 'Sound Study No. 05', duration: '00:15', hasAudio: true },
+  { src: 'videos/te henga1.mp4', poster: 'videos/te henga1-poster.jpg', title: 'Te Henga', subtitle: 'Coastal Sound Study No. 06', duration: '00:25', hasAudio: true },
 ]
 
 const projects = [
@@ -68,6 +70,13 @@ const papers = [
 
 function Arrow({ diagonal = false }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path d={diagonal ? 'M7 17 17 7M8 7h9v9' : 'M5 12h14m-5-5 5 5-5 5'} /></svg>
+}
+
+function SpeakerIcon({ muted = false }) {
+  return <svg viewBox="0 0 24 24" aria-hidden="true" className="speaker-icon">
+    <path d="M4 10v4h4l5 4V6l-5 4H4Z" />
+    {muted ? <path d="m17 9 4 4m0-4-4 4" /> : <><path d="M16 9.5c1.1 1.3 1.1 3.7 0 5" /><path d="M18.5 7c2.4 2.8 2.4 7.2 0 10" /></>}
+  </svg>
 }
 
 function navigateHomeSection(section, event) {
@@ -204,10 +213,29 @@ function CategoryArchivePage({ slug }) {
 
 function Film() {
   const [active, setActive] = useState(0)
+  const [soundOn, setSoundOn] = useState(false)
+  const [volume, setVolume] = useState(.72)
   const videoRef = useRef(null)
   const video = videos[active]
+  const hasAudio = Boolean(video.hasAudio)
   const canSlide = videos.length > 1
   const move = direction => setActive(index => (index + direction + videos.length) % videos.length)
+  const toggleSound = () => hasAudio && setSoundOn(value => !value)
+  const changeVolume = event => {
+    const next = Number(event.target.value)
+    setVolume(next)
+    setSoundOn(hasAudio && next > 0)
+  }
+  useEffect(() => {
+    if (!hasAudio) setSoundOn(false)
+  }, [hasAudio])
+  useEffect(() => {
+    const element = videoRef.current
+    if (!element) return
+    element.muted = !soundOn || !hasAudio
+    element.volume = soundOn && hasAudio ? volume : 0
+    if (soundOn) element.play().catch(() => setSoundOn(false))
+  }, [soundOn, volume, active, hasAudio])
   useEffect(() => {
     const element = videoRef.current
     if (!element) return
@@ -221,8 +249,8 @@ function Film() {
   return <section className="film-section">
     <div className="film-copy"><div className="eyebrow" data-reveal>(02) Motion works</div><h2 data-reveal data-delay="1">STORIES<br/><i>IN</i> MOTION</h2><p data-reveal data-delay="2">Short-form campaigns, cinematic edits and visual experiments — shaped from first frame to final cut.</p><a data-reveal data-delay="3" href="/videos">View all motion works <Arrow diagonal/></a></div>
     <div className="film-showcase" data-reveal="image">
-      <div className="film-frame"><video ref={videoRef} key={video.src} muted loop playsInline preload="metadata" poster={`/media/${video.poster}`}><source src={`/media/${video.src}`} type="video/mp4"/></video></div>
-      <div className="film-controls"><div><small>{String(active + 1).padStart(2, '0')} / {String(videos.length).padStart(2, '0')}</small><strong>{video.title} <i>{video.subtitle}</i></strong></div><div className="film-control-end"><small className="film-duration">{video.duration}</small><div className="film-arrows"><button onClick={() => move(-1)} disabled={!canSlide} aria-label="Previous video"><Arrow/></button><button onClick={() => move(1)} disabled={!canSlide} aria-label="Next video"><Arrow/></button></div></div></div>
+      <div className="film-frame"><video ref={videoRef} key={video.src} muted={!soundOn || !hasAudio} loop playsInline preload="metadata" poster={video.poster ? `/media/${video.poster}` : undefined}><source src={`/media/${video.src}`} type="video/mp4"/></video></div>
+      <div className="film-controls"><div><small>{String(active + 1).padStart(2, '0')} / {String(videos.length).padStart(2, '0')}</small><strong>{video.title} <i>{video.subtitle}</i></strong></div><div className="film-control-end">{hasAudio ? <div className="film-audio"><button className={soundOn ? 'is-on' : ''} onClick={toggleSound} aria-label={soundOn ? 'Mute video sound' : 'Unmute video sound'} type="button"><SpeakerIcon muted={!soundOn}/></button><input className="film-volume" aria-label="Video volume" type="range" min="0" max="1" step=".05" value={soundOn ? volume : 0} onChange={changeVolume}/></div> : null}<small className="film-duration">{video.duration}</small><div className="film-arrows"><button onClick={() => move(-1)} disabled={!canSlide} aria-label="Previous video"><Arrow/></button><button onClick={() => move(1)} disabled={!canSlide} aria-label="Next video"><Arrow/></button></div></div></div>
     </div>
   </section>
 }
@@ -231,7 +259,7 @@ function VideosPage() {
   return <section className="archive-page video-archive" id="top">
     <div className="archive-hero"><div className="eyebrow">MOTION ARCHIVE · 2026</div><h1>ALL<br/><i>MOTION</i></h1><p>Films, visual studies and cinematic fragments — directed, shot and edited frame by frame.</p><a href="/" onClick={event => navigateHomeSection('work', event)}>← Back to selected work</a></div>
     <div className="video-index-grid">{videos.map((video, index) => <article className="video-index-card" key={video.src}>
-      <div className="video-index-media"><video controls playsInline preload="metadata" poster={`/media/${video.poster}`}><source src={`/media/${video.src}`} type="video/mp4"/></video><span>{String(index + 1).padStart(2, '0')}</span></div>
+      <div className="video-index-media"><video controls playsInline preload="metadata" poster={video.poster ? `/media/${video.poster}` : undefined}><source src={`/media/${video.src}`} type="video/mp4"/></video><span>{String(index + 1).padStart(2, '0')}</span></div>
       <div className="video-index-caption"><div><h2>{video.title}</h2><p>{video.subtitle}</p></div><small>{video.duration}</small></div>
     </article>)}</div>
   </section>
